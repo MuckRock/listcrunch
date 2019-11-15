@@ -1,13 +1,9 @@
 import collections
 
-def crunch(items):
-    cruncher = collections.defaultdict(list)
-    for num, item in enumerate(items):
-        cruncher[item].append(num)
-    
+def crunch_collection(collection):
     parts = []
-    for value in cruncher:
-        nums = sorted(cruncher[value])
+    for value in collection:
+        nums = sorted(collection[value])
 
         subparts = []
         run = None
@@ -36,6 +32,13 @@ def crunch(items):
         parts.append(f"{value}:{joined}")
 
     return ";".join(parts)
+
+def crunch(items):
+    cruncher = collections.defaultdict(list)
+    for num, item in enumerate(items):
+        cruncher[item].append(num)
+    
+    return crunch_collection(cruncher)
 
 def uncrunch(s):
     if len(s.strip()) == 0: return []

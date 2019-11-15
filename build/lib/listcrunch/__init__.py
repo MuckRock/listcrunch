@@ -1,1 +1,1 @@
-from .listcrunch import crunch, uncrunch
+from .listcrunch import crunch, crunch_collection, uncrunch
