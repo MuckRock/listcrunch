@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.2.0",
     author="Dylan Freedman",
     author_email="freedmand@gmail.com",
-    description="A simple human-readable way to compress redundant sequential numerical data",
+    description="A simple human-readable way to compress redundant sequential data",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/MuckRock/listcrunch",
