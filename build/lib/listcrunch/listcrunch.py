@@ -1,5 +1,8 @@
 import collections
 
+class ListCrunchError(Exception):
+    pass
+
 def crunch_collection(collection):
     parts = []
     for value in collection:
@@ -48,15 +51,17 @@ def uncrunch(s):
     parts = s.split(';')
     for part in parts:
         subparts = part.split(':')
-        assert len(subparts) == 2
-        value = float(subparts[0])
+        if len(subparts) != 2:
+            raise ListCrunchError("Each ';'-delimited region must have exactly one ':'")
+        value = subparts[0]
         specs = subparts[1].split(',')
 
         for spec in specs:
             if '-' in spec:
                 # Parse a range
                 startEnd = spec.split('-')
-                assert len(startEnd) == 2
+                if len(startEnd) != 2:
+                    raise ListCrunchError("Each page range (e.g. 3-5) must have exactly one '-'")
                 start = int(startEnd[0])
                 end = int(startEnd[1])
                 for i in range(start, end + 1):
@@ -66,5 +71,6 @@ def uncrunch(s):
     
     sorted_results = sorted(results, key=lambda x: x[0])
     nums, values = zip(*sorted_results)
-    assert list(nums) == list(range(len(results)))
+    if list(nums) != list(range(len(results))):
+        raise ListCrunchError("Inconsistent results length: this should never happen")
     return list(values)
