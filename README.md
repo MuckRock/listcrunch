@@ -1,6 +1,6 @@
 # ListCrunch
 
-A simple human-readable way to compress redundant sequential numerical data.
+A simple human-readable way to compress redundant sequential data.
 
 ## Example
 
@@ -17,6 +17,6 @@ To uncompress, use the `uncrunch` function.
 ```python
 from listcrunch import uncrunch
 
-assert uncrunch('50:0-1,3-4;3:2,5;60:6;70:7-8')
-# Returns [50, 50, 3, 50, 50, 3, 60, 70, 70]
+uncrunch('50:0-1,3-4;3:2,5;60:6;70:7-8')
+# Returns ['50', '50', '3', '50', '50', '3', '60', '70', '70']
 ```
