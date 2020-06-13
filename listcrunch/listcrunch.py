@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import collections
 
 class ListCrunchError(Exception):
@@ -5,8 +7,7 @@ class ListCrunchError(Exception):
 
 def crunch_collection(collection):
     parts = []
-    for value in collection:
-        nums = sorted(collection[value])
+    for value, nums in sorted(collection.items(), key=lambda x: x[1]):
 
         subparts = []
         run = None
@@ -15,9 +16,9 @@ def crunch_collection(collection):
             if run is None:
                 return
             if run[0] == run[1]:
-                subparts.append(f"{run[0]}")
+                subparts.append("{}".format(run[0]))
             else:
-                subparts.append(f"{run[0]}-{run[1]}")
+                subparts.append("{}-{}".format(run[0], run[1]))
         
         for num in nums:
             if run is None:
@@ -32,7 +33,7 @@ def crunch_collection(collection):
 
         end_run(run)
         joined = ",".join(subparts)
-        parts.append(f"{value}:{joined}")
+        parts.append("{}:{}".format(value, joined))
 
     return ";".join(parts)
 
